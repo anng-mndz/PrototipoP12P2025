@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1744129182 source:c:\users\mende\onedrive\documents\laboratorio\progra1\prototipop12p2025\prototipop12p2025\main.cpp
+	"eleccion.h"
+
+1744129694 c:\users\mende\onedrive\documents\laboratorio\progra1\prototipop12p2025\prototipop12p2025\include\eleccion.h
+	<iostream>
+	<string>
+	<cstdlib>
+	<ctime>
+
+1744129182 source:c:\users\mende\onedrive\documents\laboratorio\progra1\prototipop12p2025\prototipop12p2025\src\eleccion.cpp
+	"eleccion.h"
+
