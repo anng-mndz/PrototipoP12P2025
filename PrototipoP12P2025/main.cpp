@@ -1,47 +1,49 @@
-// main.cpp
-// ========================================================
-// Este archivo contiene el PROGRAMA PRINCIPAL (main).
-// Aquí es donde se ejecuta toda la lógica:
-// - Se crean variables
-// - Se llaman funciones
-// - Se repite el ciclo de votaciones si el usuario quiere
-// ========================================================
-
-#include "eleccion.h" // Incluye las funciones y constantes necesarias
+#include "eleccion.h"
 
 int main() {
-    // Inicializa la semilla aleatoria para que los resultados cambien cada vez
     srand(time(0));
 
-    // === DECLARACIÓN DE VECTORES Y MATRICES ===
+    // Crear los tres partidos
+    Partido partido1("Republicano");
+    Partido partido2("Democrata");
+    Partido partido3("Independiente");
 
-    // Vector para almacenar los nombres de los candidatos
-    string candidatos[NUM_CANDIDATOS];
-
-    // Vector que guarda los nombres de los partidos (ordenados)
-    string partidos[NUM_CANDIDATOS] = {
-        "Partido A", "Partido B", "Partido C", "Partido D", "Partido E"
-    };
-
-    // Matriz de votos: filas = candidatos, columnas = rondas
-    // votos[c][r] representa los votos del candidato c en la ronda r
-    int votos[NUM_CANDIDATOS][NUM_RONDAS] = {0}; // Se inicializa con ceros
-
-    char repetir; // Para saber si el usuario desea repetir la elección
-
+    char repetir;
     do {
-        // === LLAMADAS A FUNCIONES ===
+        // Ingreso de candidatos y generación de votos
+        partido1.ingresarCandidatos();
+        partido1.generarVotos();
 
-        ingresarCandidatos(candidatos);               // Paso 1: ingresar candidatos
-        generarVotos(votos);                          // Paso 2: simular votación aleatoria
-        mostrarResultados(partidos, candidatos, votos); // Paso 3: mostrar resultados
-        calcularGanador(candidatos, votos);           // Paso 4: calcular y mostrar ganador/perdedor
+        partido2.ingresarCandidatos();
+        partido2.generarVotos();
 
-        // Preguntar si se desea repetir la elección
+        partido3.ingresarCandidatos();
+        partido3.generarVotos();
+
+        // Mostrar resultados y cálculos
+        partido1.mostrarResultados();
+        partido1.calcularGanadorPerdedor();
+
+        partido2.mostrarResultados();
+        partido2.calcularGanadorPerdedor();
+
+        partido3.mostrarResultados();
+        partido3.calcularGanadorPerdedor();
+
+        // Comparar promedios entre partidos
+        float prom1 = partido1.calcularPromedio();
+        float prom2 = partido2.calcularPromedio();
+        float prom3 = partido3.calcularPromedio();
+
+        float mayorProm = max(prom1, max(prom2, prom3));
+        string mejorPartido = (mayorProm == prom1) ? partido1.getNombre() : (mayorProm == prom2) ? partido2.getNombre() : partido3.getNombre();
+
+        cout << "\nEl mejor partido fue: " << mejorPartido << " con un promedio de " << mayorProm << " votos.\n";
+
         cout << "\nDesea realizar otra eleccion? (s/n): ";
         cin >> repetir;
 
-    } while (repetir == 's' || repetir == 'S'); // Repite si el usuario dice que sí
+    } while (repetir == 's' || repetir == 'S');
 
-    return 0; // Fin del programa
+    return 0;
 }

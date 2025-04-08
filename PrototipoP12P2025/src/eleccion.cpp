@@ -1,5 +1,4 @@
-#include "ELECCION_H"
-
+#include "eleccion.h"
 Partido::Partido(string _nombre) {
     nombre = _nombre;
     // Inicializa los votos en cero
