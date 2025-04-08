@@ -1,5 +1,7 @@
 // eleccion.h
 // ========================================================
+// LUIS ANGEL MENDEZ FUENTES 9959-24-6845
+// SEGUNDO PARCIAL PRACTICO SERIE IV
 // Este es el archivo de CABECERA (header).
 // Aquí se declaran las CONSTANTES y las FUNCIONES que luego
 // serán implementadas en "eleccion.cpp".

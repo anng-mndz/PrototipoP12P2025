@@ -1,5 +1,7 @@
 // eleccion.cpp
 // ========================================================
+// LUIS ANGEL MENDEZ FUENTES 9959-24-6845
+// SEGUNDO PARCIAL PRACTICO SERIE IV
 // Este archivo contiene la IMPLEMENTACIÓN de las funciones
 // declaradas en "eleccion.h". Aquí se escribe cómo
 // funcionan internamente.

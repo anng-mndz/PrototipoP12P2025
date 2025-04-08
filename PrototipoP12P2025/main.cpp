@@ -1,5 +1,7 @@
 // main.cpp
 // ========================================================
+// LUIS ANGEL MENDEZ FUENTES 9959-24-6845
+// SEGUNDO PARCIAL PRACTICO SERIE IV
 // Este archivo contiene el PROGRAMA PRINCIPAL (main).
 // Aquí es donde se ejecuta toda la lógica:
 // - Se crean variables
