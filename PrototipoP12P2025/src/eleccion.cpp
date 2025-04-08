@@ -1,116 +1,86 @@
-// eleccion.cpp
-// ========================================================
-// Este archivo contiene la IMPLEMENTACIÓN de las funciones
-// declaradas en "eleccion.h". Aquí se escribe cómo
-// funcionan internamente.
-// ========================================================
+#include "ELECCION_H"
 
-#include "eleccion.h" // Incluye las declaraciones necesarias
+Partido::Partido(string _nombre) {
+    nombre = _nombre;
+    // Inicializa los votos en cero
+    for (int i = 0; i < NUM_CANDIDATOS; i++) {
+        for (int j = 0; j < NUM_ANIOS; j++) {
+            votos[i][j] = 0;
+        }
+    }
+}
 
-// --------------------------------------------------------
-// Función: ingresarCandidatos
-// Solicita al usuario que ingrese el nombre de cada candidato
-// Los nombres se almacenan en un vector de strings.
-// --------------------------------------------------------
-void ingresarCandidatos(string candidatos[]) {
-    cout << "Ingrese los nombres de los " << NUM_CANDIDATOS << " candidatos:" << endl;
+void Partido::ingresarCandidatos() {
+    cout << "Ingrese los nombres de los " << NUM_CANDIDATOS << " candidatos para el partido " << nombre << ":\n";
     for (int i = 0; i < NUM_CANDIDATOS; i++) {
         cout << "Candidato " << i + 1 << ": ";
-        cin >> candidatos[i];  // Guarda el nombre en la posición i del vector
+        cin >> candidatos[i];
     }
 }
 
-// --------------------------------------------------------
-// Función: generarVotos
-// Simula una elección generando votos aleatorios para cada
-// candidato en cada ronda. Usa una matriz para almacenar
-// los votos [candidato][ronda].
-// --------------------------------------------------------
-void generarVotos(int votos[][NUM_RONDAS]) {
-    for (int r = 0; r < NUM_RONDAS; r++) { // Para cada ronda
-        int votos_restantes = NUM_VOTANTES; // Total de votos disponibles
-
-        // Se reparten votos aleatorios a los primeros candidatos
-        for (int c = 0; c < NUM_CANDIDATOS - 1; c++) {
-            votos[c][r] = rand() % (votos_restantes + 1); // Votos aleatorios entre 0 y votos_restantes
-            votos_restantes -= votos[c][r]; // Se descuentan los votos asignados
+void Partido::generarVotos() {
+    for (int i = 0; i < NUM_CANDIDATOS; i++) {
+        for (int j = 0; j < NUM_ANIOS; j++) {
+            votos[i][j] = rand() % (MAX_VOTOS + 1);
         }
-
-        // Al último candidato se le asigna lo que queda, para que siempre sumen 50
-        votos[NUM_CANDIDATOS - 1][r] = votos_restantes;
     }
 }
 
-// --------------------------------------------------------
-// Función: mostrarResultados
-// Muestra una tabla con los resultados de la elección.
-// Incluye partidos, candidatos, votos por ronda y total.
-// También suma los votos por ronda.
-// --------------------------------------------------------
-void mostrarResultados(string partidos[], string candidatos[], int votos[][NUM_RONDAS]) {
-    cout << "\nResultados de la eleccion:\n";
-    cout << "--------------------------------------------------\n";
-    cout << "Partido    | Candidato ";
-
-    // Encabezados de rondas
-    for (int r = 0; r < NUM_RONDAS; r++) {
-        cout << "| Ronda " << r + 1 << " ";
+void Partido::mostrarResultados() {
+    cout << "\nResultados del partido: " << nombre << "\n";
+    cout << "-------------------------------------------------------------\n";
+    cout << "Candidato\t";
+    for (int j = 0; j < NUM_ANIOS; j++) {
+        cout << ANIOS[j] << "\t";
     }
-    cout << "| Total\n";
-    cout << "--------------------------------------------------\n";
+    cout << "Total\n";
 
-    int sumaRondas[NUM_RONDAS] = {0}; // Suma de votos por cada ronda
+    cout << "-------------------------------------------------------------\n";
 
-    for (int c = 0; c < NUM_CANDIDATOS; c++) {
-        cout << partidos[c] << " | " << candidatos[c] << " \t";
-        int total = 0; // Total de votos de este candidato
-
-        for (int r = 0; r < NUM_RONDAS; r++) {
-            cout << "| " << votos[c][r] << " \t"; // Mostrar votos por ronda
-            total += votos[c][r];                // Sumar al total del candidato
-            sumaRondas[r] += votos[c][r];        // Acumular por ronda
+    for (int i = 0; i < NUM_CANDIDATOS; i++) {
+        cout << candidatos[i] << "\t";
+        int total = 0;
+        for (int j = 0; j < NUM_ANIOS; j++) {
+            cout << votos[i][j] << "\t";
+            total += votos[i][j];
         }
-
-        cout << "| " << total << "\n"; // Total de votos por candidato
+        cout << total << endl;
     }
-
-    // Mostrar la suma de votos por cada ronda
-    cout << "--------------------------------------------------\n";
-    cout << "Votos por ronda  ";
-    for (int r = 0; r < NUM_RONDAS; r++) {
-        cout << "| " << sumaRondas[r] << " \t";
-    }
-    cout << "|\n";
+    cout << "-------------------------------------------------------------\n";
 }
 
-// --------------------------------------------------------
-// Función: calcularGanador
-// Determina el candidato con más votos (ganador) y el de
-// menos votos (perdedor) sumando todas las rondas.
-// --------------------------------------------------------
-void calcularGanador(string candidatos[], int votos[][NUM_RONDAS]) {
-    int maxVotos = 0;                            // Mayor número de votos encontrados
-    int minVotos = NUM_VOTANTES * NUM_RONDAS;   // Mínimo inicializado al máximo posible
+float Partido::calcularPromedio() {
+    int sumaTotal = 0;
+    for (int i = 0; i < NUM_CANDIDATOS; i++) {
+        for (int j = 0; j < NUM_ANIOS; j++) {
+            sumaTotal += votos[i][j];
+        }
+    }
+    return (float)sumaTotal / (NUM_CANDIDATOS * NUM_ANIOS);
+}
+
+void Partido::calcularGanadorPerdedor() {
+    int maxVotos = 0, minVotos = MAX_VOTOS * NUM_ANIOS;
     string ganador, perdedor;
 
-    for (int c = 0; c < NUM_CANDIDATOS; c++) {
-        int total = 0; // Total de votos de este candidato
-
-        for (int r = 0; r < NUM_RONDAS; r++) {
-            total += votos[c][r]; // Suma total por candidato
+    for (int i = 0; i < NUM_CANDIDATOS; i++) {
+        int total = 0;
+        for (int j = 0; j < NUM_ANIOS; j++) {
+            total += votos[i][j];
         }
-
         if (total > maxVotos) {
             maxVotos = total;
-            ganador = candidatos[c];
+            ganador = candidatos[i];
         }
-
         if (total < minVotos) {
             minVotos = total;
-            perdedor = candidatos[c];
+            perdedor = candidatos[i];
         }
     }
+    cout << "\nGanador del partido " << nombre << ": " << ganador << " con " << maxVotos << " votos." << endl;
+    cout << "Perdedor del partido " << nombre << ": " << perdedor << " con " << minVotos << " votos." << endl;
+}
 
-    cout << "\nEl ganador de la eleccion es: " << ganador << " con " << maxVotos << " votos.";
-    cout << "\nEl candidato con menos votos es: " << perdedor << " con " << minVotos << " votos.\n";
+string Partido::getNombre() {
+    return nombre;
 }
