@@ -1,0 +1,35 @@
+commit a40f9dea9649fbc026a7ae6831e345b4315b96f9
+Author: [Angel Mendez] <[lmendezf1@miumg.edu.gt]>
+Date:   Tue Apr 8 10:49:53 2025 -0600
+
+    Docuementacion del programa
+
+commit 3a7c50da4f4c4b7e59ac6fda25fb028d0b35d4ca
+Author: [Angel Mendez] <[lmendezf1@miumg.edu.gt]>
+Date:   Tue Apr 8 10:39:29 2025 -0600
+
+    Cambios en el main del programa
+
+commit d78cba0bfab4c1b9b451dc2db3cf48c3b2e385cb
+Author: [Angel Mendez] <[lmendezf1@miumg.edu.gt]>
+Date:   Tue Apr 8 10:35:16 2025 -0600
+
+    Cambios en el .cpp
+
+commit 139146c23e69ca5ce8f7727ee785c0411e5b685d
+Author: [Angel Mendez] <[lmendezf1@miumg.edu.gt]>
+Date:   Tue Apr 8 10:32:11 2025 -0600
+
+    Cambios en .h
+
+commit a2efed6d56c02c4db87a975c3862a10eceea5264
+Author: [Angel Mendez] <[lmendezf1@miumg.edu.gt]>
+Date:   Tue Apr 8 10:18:08 2025 -0600
+
+    Agregar el programa inicial
+
+commit 3542a0d4f49d97e04ac70af76edf1b4a9fadb75f
+Author: Angel Mendez <lmendezf1@miumg.edu.gt>
+Date:   Tue Apr 8 10:12:39 2025 -0600
+
+    Initial commit
