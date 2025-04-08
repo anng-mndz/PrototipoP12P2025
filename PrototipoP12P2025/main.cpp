@@ -1,7 +1,15 @@
-#include "eleccion.h"
+// main.cpp
+// ========================================================
+// Este archivo contiene el PROGRAMA PRINCIPAL (main).
+// Aquí es donde se ejecuta toda la lógica:
+// - Se crean variables
+// - Se llaman funciones
+// - Se repite el ciclo de votaciones si el usuario quiere
+// ========================================================
+#include "eleccion.h" // funciones y constantes necesarias
 
 int main() {
-    srand(time(0));
+    srand(time(0)); //inicializa el aleatorio
 
     // Crear los tres partidos
     Partido partido1("Republicano");

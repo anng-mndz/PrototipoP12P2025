@@ -1,3 +1,11 @@
+// eleccion.h
+// ========================================================
+// Este es el archivo de CABECERA (header).
+// Aquí se declaran las CONSTANTES y las FUNCIONES que luego
+// serán implementadas en "eleccion.cpp".
+// También se colocan los #include necesarios.
+// ========================================================
+
 #ifndef ELECCION_H
 #define ELECCION_H
 
